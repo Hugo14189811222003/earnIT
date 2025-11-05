@@ -1,0 +1,15 @@
+{
+  "name": "inscriptions",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/express": "^5.0.5",
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
