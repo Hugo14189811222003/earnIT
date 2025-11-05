@@ -18,6 +18,21 @@ class UsuarioRepository {
     const [rows] = await pool.query('SELECT * FROM usuario');
     return rows;
   }
+
+  async actualizarUsuario(id_usuario, {nombre, email, password}) {
+    const [result] = await pool.query(
+      'UPDATE usuario SET nombre = ?, email = ?, password = ? WHERE id_usuario = ?',
+      [nombre, email, password, id_usuario]
+    );
+    return result;
+  }
+  async eliminarUsuario (id_usuario) {
+    const [result] = await pool.query(
+      'DELETE FROM usuario WHERE id_usuario = ?',
+      [id_usuario]
+    );
+    return result;
+  }
 }
 
 module.exports = UsuarioRepository;
