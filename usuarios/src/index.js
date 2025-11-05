@@ -1,9 +1,13 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const usuarioRoutes = require('./routers/usuario.router.js');
+
 const app = express();
-require('dotenv').config();
+app.use(bodyParser.json());
 
-const PORT = process.env.PORT || 3000;
+app.use('/api/usuarios', usuarioRoutes);
 
+const PORT = 3000;
 app.listen(PORT, () => {
-    console.log('Servidor arrancando en el puerto ' + PORT)
-})
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
