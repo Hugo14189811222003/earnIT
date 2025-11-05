@@ -1,0 +1,1 @@
+docker build -t earnit-users:0.01 .
