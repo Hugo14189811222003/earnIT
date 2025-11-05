@@ -1,0 +1,16 @@
+services:
+  service-a:
+    extends:
+      file: ./service-a/docker-compose.yml
+      service: service-a
+
+  service-b:
+    extends:
+      file: ./service-b/docker-compose.yml
+      service: service-b
+
+  service-c:
+    extends:
+      file: ./service-c/docker-compose.yml
+      service: service-c
+
