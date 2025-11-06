@@ -12,18 +12,18 @@ class MySQLCursoRepository extends ICursoRepository {
     return rows[0];
   }
 
-  async crearCurso({ titulo, descripcion, duracion }) {
+  async crearCurso({ titulo, descripcion, duracion, progreso }) {
     const [result] = await pool.query(
-      'INSERT INTO curso (titulo, descripcion, duracion) VALUES (?, ?, ?)',
-      [titulo, descripcion, duracion]
+      'INSERT INTO curso (titulo, descripcion, duracion, progreso) VALUES (?, ?, ?, ?)',
+      [titulo, descripcion, duracion, progreso]
     );
     return result;
   }
 
-  async actualizarCurso(id_curso, { titulo, descripcion, duracion }) {
+  async actualizarCurso(id_curso, { titulo, descripcion, duracion, progreso }) {
     const [result] = await pool.query(
-      'UPDATE curso SET titulo = ?, descripcion = ?, duracion = ? WHERE id_curso = ?',
-      [titulo, descripcion, duracion, id_curso]
+      'UPDATE curso SET titulo = ?, descripcion = ?, duracion = ?, progreso = ? WHERE id_curso = ?',
+      [titulo, descripcion, duracion, progreso, id_curso]
     );
     return result;
   }

@@ -7,11 +7,11 @@ class ICursoRepository {
     throw new Error("Method 'obtenerCursoPorId()' must be implemented.");
   }
 
-  async crearCurso({ titulo, descripcion, duracion }) {
+  async crearCurso({ titulo, descripcion, duracion, progreso }) {
     throw new Error("Method 'crearCurso()' must be implemented.");
   }
 
-  async actualizarCurso(id_curso, { titulo, descripcion, duracion }) {
+  async actualizarCurso(id_curso, { titulo, descripcion, duracion, progreso }) {
     throw new Error("Method 'actualizarCurso()' must be implemented.");
   }
 

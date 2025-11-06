@@ -13,7 +13,8 @@ class CursoService {
         return await repo.crearCurso({
             titulo: data.titulo,
             descripcion: data.descripcion,
-            duracion: data.duracion
+            duracion: data.duracion,
+            progreso: data.progreso
         })
     }
     async actualizarCurso(id_curso, data) {
@@ -24,7 +25,8 @@ class CursoService {
         return await repo.actualizarCurso(id_curso, {
             titulo: data.titulo,
             descripcion: data.descripcion,
-            duracion: data.duracion
+            duracion: data.duracion,
+            progreso: data.progreso
         });
     }
     async eliminarCurso (id_curso) {
