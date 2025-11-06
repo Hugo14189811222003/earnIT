@@ -1,37 +1,31 @@
-version: '3.8'
-
 services:
   usuarios-api:
     build: .
-    image: earnit-users:0.01
+    image: earnit-users:0.05
     ports:
-      - "3000:3000"
+      - "${API_PORT:-3000}:3000"
     environment:
       - DB_HOST=db
-      - DB_USER=root
-      - DB_PASSWORD=password
-      - DB_DATABASE=usuarios_db
+      - DB_USER=${DB_USER:-root}
+      - DB_PASSWORD=${DB_PASSWORD:-password}
+      - DB_DATABASE=${DB_DATABASE:-usuarios_db}
+      - DB_PORT=3306
     depends_on:
-      - db
-    networks:
-      - app-network
+      db:
+        condition: service_healthy
 
   db:
     image: mysql:8.0
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=usuarios_db
+      # - MYSQL_DATABASE=usuarios_db # We dont use it because we create the database in the init.sql script
     ports:
-      - "3306:3306"
+      - "7010:3306"
     volumes:
-      - db-data:/var/lib/mysql
-    networks:
-      - app-network
-
-volumes:
-  db-data:
-
-networks:
-  app-network:
-    driver: bridge
+      - ./database/db.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
