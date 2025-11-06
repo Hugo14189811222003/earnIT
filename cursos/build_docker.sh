@@ -1,0 +1,1 @@
+docker build -t earnit-cursos:0.01 .
