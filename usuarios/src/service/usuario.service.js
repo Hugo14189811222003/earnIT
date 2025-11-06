@@ -1,27 +1,33 @@
 const bcrypt = require('bcrypt');
-const UsuarioRepository = require('../repository/usuario.repository.js');
 
-const repo = new UsuarioRepository();
+class UserService {
 
-class UsuarioService {
+  constructor(userRepository) {
+    this.userRepository = userRepository;
+  }
+
   async registrarUsuario(data) {
-    const existente = await repo.obtenerUsuarioPorEmail(data.email);
+    if (!data.nombre || !data.email || !data.password) {
+      throw new Error('Nombre, email y password son requeridos');
+    }
+    console.log(data)
+    const existente = await this.userRepository.getUserByEmail(data.email);
     if (existente) throw new Error('El usuario ya existe');
 
     const hashedPassword = await bcrypt.hash(data.password, 10);
-    return await repo.crearUsuario({ 
-      nombre: data.nombre, 
-      email: data.email, 
-      password: hashedPassword 
+    return await this.userRepository.createUser({
+      nombre: data.nombre,
+      email: data.email,
+      password: hashedPassword
     });
   }
 
   async listarUsuarios() {
-    return await repo.obtenerTodos();
+    return await this.userRepository.getAllUsers();
   }
 
   async actualizarUsuario(id_usuario, data) {
-    const existente = await repo.obtenerUsuarioPorEmail(data.email);
+    const existente = await this.userRepository.getUserByEmail(data.email);
 
     if (existente && existente.id_usuario !== parseInt(id_usuario)) {
       throw new Error('El email ya está en uso por otro usuario');
@@ -32,7 +38,7 @@ class UsuarioService {
       hashedPassword = await bcrypt.hash(data.password, 10);
     }
 
-    const result = await repo.actualizarUsuario(id_usuario, {
+    const result = await this.userRepository.updateUser(id_usuario, {
       nombre: data.nombre,
       email: data.email,
       password: hashedPassword
@@ -46,7 +52,7 @@ class UsuarioService {
   }
 
   async eliminarUsuario(id) {
-    const result = await repo.eliminarUsuario(id);
+    const result = await this.userRepository.deleteUser(id);
     if (result.affectedRows === 0) {
       throw new Error('Usuario no encontrado');
     }
@@ -54,4 +60,4 @@ class UsuarioService {
   }
 }
 
-module.exports = { UsuarioService };
+module.exports = { UserService };
