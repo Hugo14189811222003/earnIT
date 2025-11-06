@@ -1,4 +1,4 @@
-const CursoRepository = require('../repository/curso.repository.js');
+const CursoRepository = require('../repository/MySQLCursoRepository.js');
 
 const  repo = new CursoRepository();
 
