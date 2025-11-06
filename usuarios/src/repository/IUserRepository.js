@@ -11,17 +11,7 @@ class IUserRepository {
         throw new Error("Method 'findById()' must be implemented.");
     }
 
-    /** Fetches all users who are active. */
-    async findAllActive() {
-        throw new Error("Method 'findAllActive()' must be implemented.");
-    }
-
-    /** Saves a new user to the persistence layer. */
-    async save(user) {
-        throw new Error("Method 'save()' must be implemented.");
-    }
-
-    async createUser(user) {
+    async createUser({ nombre, email, password }) {
         throw new Error("Method 'createUser()' must be implemented.");
     }
 
@@ -33,7 +23,7 @@ class IUserRepository {
         throw new Error("Method 'getAllUsers()' must be implemented.");
     }
 
-    async updateUser(id, user) {
+    async updateUser(id_usuario, { nombre, email, password }) {
         throw new Error("Method 'updateUser()' must be implemented.");
     }
 
