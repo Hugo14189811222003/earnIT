@@ -1,5 +1,5 @@
 import express, { Express, Request, Response } from "express";
-import { PostgresInscriptionRepository } from "./repository";
+import { PostgresInscriptionRepository } from "./PostgresInscriptionRepository";
 
 const app: Express = express();
 const port = process.env.PORT || 3001;
@@ -60,7 +60,6 @@ app.delete("/inscriptions/:course_id/:user_id", async (req: Request, res: Respon
 async function startServer() {
     try {
         repository = await PostgresInscriptionRepository.build();
-        await repository.createTable();
         app.listen(port, () => {
             console.log(`[server]: Server is running at http://localhost:${port}`);
         });
