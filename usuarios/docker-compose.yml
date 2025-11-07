@@ -5,16 +5,16 @@ services:
     ports:
       - "${API_PORT:-3000}:3000"
     environment:
-      - DB_HOST=db
+      - DB_HOST=usuarios-db
       - DB_USER=${DB_USER:-root}
       - DB_PASSWORD=${DB_PASSWORD:-password}
       - DB_DATABASE=${DB_DATABASE:-usuarios_db}
       - DB_PORT=3306
     depends_on:
-      db:
+      usuarios-db:
         condition: service_healthy
 
-  db:
+  usuarios-db:
     image: mysql:8.0
     restart: always
     environment:
